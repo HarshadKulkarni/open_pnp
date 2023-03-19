@@ -1,0 +1,24 @@
+{% if lobby_phone_count != 0 %}
+{% for item in lobby_phone_ports %}
+!
+interface {{ item.type }}{{ item.number }}
+ description --> {{ item.name }}
+ switchport access vlan {{ Vlans.Admin.Vlan_Id }}
+ switchport voice vlan {{ Vlans.Voice.Vlan_Id }}
+ switchport mode access
+ switchport port-security
+ switchport port-security aging time 1
+ switchport port-security maximum 1
+ switchport port-security violation restrict
+ switchport port-security aging type inactivity
+ switchport port-security mac-address {{ item.phone_mac_address }}
+ priority-queue out
+ storm-control broadcast level 30.00
+ spanning-tree portfast
+ ip verify source
+ ip dhcp snooping limit rate 100
+ snmp trap mac-notification change added
+ snmp trap mac-notification change removed
+ no shutdown
+{% endfor %}
+{% endif %}

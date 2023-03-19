@@ -1,0 +1,44 @@
+---
+#  This file will define the all group variables.
+
+new_hpna: 10.47.135.168
+ansible_network_os: ios
+sshtimeoutvalue: 60
+sshversion: 2
+admin_1_password: abc123
+forescout_dr: 10.47.135.132
+buffer_size: 64000
+ro_46_lieberman: roadblocker!87
+ro_47_lieberman: roadblocker!34
+rw_96_lieberman: roadblocker!2
+rw_97_lieberman: roadblocker!t5
+tacacs_servers: 
+  - 10.47.134.22
+  - 10.47.135.23
+  - 10.48.134.49
+aaa_key: roadblocker
+ntp:
+  - 10.47.134.30
+  - 10.47.134.31
+  - 10.47.135.155
+  - 10.48.137.164
+NA:
+  siem: 10.47.169.79
+  forescout: 10.47.135.131
+  nnmi: 10.47.135.165
+  domain: gw.na.xyz.com
+LA:
+  siem: 10.117.253.26
+  forescout: 10.117.69.144
+  nnmi: 10.47.135.167
+  domain: gw.la.xyz.com
+AP:
+  siem: 172.26.59.183
+  forescout: 172.26.18.214
+  nnmi: 10.47.135.167
+  domain: gw.sg.xyz.com
+EU:
+  siem: 10.160.129.26
+  forescout: 10.160.67.48
+  nnmi: 10.47.135.167
+  domain: gw.eu.xyz.com

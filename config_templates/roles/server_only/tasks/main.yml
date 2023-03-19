@@ -1,0 +1,4 @@
+- name: execute template
+  ansible.builtin.template:
+    src: main.j2
+    dest: 'configs/{{ Serial_Number }}.cfg'

@@ -1,0 +1,18 @@
+line con 0
+ exec-timeout 10 0
+ logging synchronous
+ usb-inactivity-timeout 30
+ timeout login response 90
+ transport preferred none
+ login authentication default
+ transport output none
+line vty 0 15
+ access-class 75 in
+ access-class 9 out
+ exec-timeout 10 0
+ logging synchronous
+ timeout login response 90
+ transport preferred none
+ login authentication default
+ transport input ssh
+ transport output none

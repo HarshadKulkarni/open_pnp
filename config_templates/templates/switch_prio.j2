@@ -1,0 +1,34 @@
+{% if switch_number_in_stack == 6 %}
+do-exec switch 1 priority 15
+do-exec switch 2 priority 12
+do-exec switch 3 priority 9
+do-exec switch 4 priority 6
+do-exec switch 5 priority 3
+do-exec switch 6 priority 1
+!
+{% elif switch_number_in_stack == 5 %}
+do-exec switch 1 priority 15
+do-exec switch 2 priority 12
+do-exec switch 3 priority 9
+do-exec switch 4 priority 6
+do-exec switch 5 priority 3
+!
+{% elif switch_number_in_stack == 4 %}
+do-exec switch 1 priority 15
+do-exec switch 2 priority 12
+do-exec switch 3 priority 9
+do-exec switch 4 priority 6
+!
+{% elif switch_number_in_stack == 3 %}
+do-exec switch 1 priority 15
+do-exec switch 2 priority 12
+do-exec switch 3 priority 9
+!
+{% elif switch_number_in_stack == 2 %}
+do-exec switch 1 priority 15
+do-exec switch 2 priority 12
+!
+{% elif switch_number_in_stack == 1 %}
+do-exec switch 1 priority 15
+!
+{% endif %}

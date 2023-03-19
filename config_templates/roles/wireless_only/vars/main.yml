@@ -1,0 +1,82 @@
+# *********Config_Section************
+
+dhcp_subnet: 10.31.196.0/24
+
+is_device_in_network: 'No'
+
+Serial_Number: FJC26401S0G
+
+Hostname: edinaoclab898-swt
+
+Domain_Name: gw.na.xyz.com
+Vlans:
+  Wireless:
+      Vlan_Id: 600
+      Primary_Address: 10.46.2.18
+      mask: 255.255.255.192
+ 
+port_channel: 'No'
+
+local_po: ''
+remote_po: ''
+
+Uplinks:
+  - number: 1/0/1
+    remote_SW_int: Gig1/0/2
+    type: TenGigabitEthernet
+    remote_hostname_short: edinaoclab701-lds
+     
+wap_ports_count: 5
+
+wap_ports:
+  - type: TenGigabitEthernet
+    number: 1/0/2
+    wap_name: edinaoclab900-wap
+    wap_int: Gig 0/0
+  - type: TenGigabitEthernet
+    number: 1/0/3
+    wap_name: edinaoclab901-wap
+    wap_int: Gig 0/0
+  - type: TenGigabitEthernet
+    number: 1/0/4
+    wap_name: edinaoclab902-wap
+    wap_int: Gig 0/0
+  - type: TenGigabitEthernet
+    number: 1/0/5
+    wap_name: edinaoclab903-wap
+    wap_int: Gig 0/0
+  - type: TenGigabitEthernet
+    number: 1/0/6
+    wap_name: edinaoclab899-sen
+    wap_int: Gig 0/0
+   
+switch_number_in_stack: 1
+
+switch_number_in_stack_list: 
+  - 1
+  
+switch_model_1: C9300-24UX
+
+ip_default_gateway: 10.46.2.1
+
+snmp_location: '#r_NA#c_edinaoclab#s_edinaOC#Bd_H#Ro_OCCR_LL'
+
+# *********CMDB_Section************
+add_device:
+   - Name:  edinaoclab898-swt.gw.na.xyz.com
+     SerialNumber: FJC26401S0G
+     ShortDescription: "Admin L3 switch"
+     Model: "C9300-24UX"
+     ManufacturerName: "Cisco Systems"
+     SupportedBy: "L2_Ops"
+     OwnedBy: "VASANTHA KUMAR MOHANASUNDARAM"
+     Status: "Being Assembled"
+     PrimaryUsage: "Layer 2 Switch"
+     Room: "OCCR"
+     Floor: "LL"
+     Impact: "3-Moderate/Limited"
+     IsVirtual: "No"
+     Capability: "Switch"
+     Site: "edina-MN-OFFICE CENTER- 15407 MCGINTY RD W"
+     Urgency: "3-Medium"
+     Environment: "Production"

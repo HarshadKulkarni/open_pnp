@@ -1,0 +1,21 @@
+{% if wap_ports_count != 0 %}
+{% for item in wap_ports %}
+!
+interface {{ item.type }}{{ item.number }}
+ description --> {{ item.wap_name }} --> {{ item.wap_int }}
+ switchport access vlan {{ Vlans.Wireless.Vlan_Id }}
+ switchport mode access
+ ip arp inspection trust
+ ip dhcp snooping trust
+ no mdix auto
+ storm-control broadcast level 30.00
+ cdp enable
+ spanning-tree portfast
+ ip verify source
+ ip dhcp snooping limit rate 100
+ snmp trap mac-notification change added
+ snmp trap mac-notification change removed
+ no shutdown
+!
+{% endfor %}
+{% endif %}

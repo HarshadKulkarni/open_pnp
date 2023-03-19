@@ -1,0 +1,42 @@
+!
+username admin privilege 15 secret abc123
+username netadmin privilege 15 secret abc123
+!
+system mtu 1500
+vtp mode transparent
+udld enable
+!
+spanning-tree mode rapid-pvst
+spanning-tree loopguard default
+spanning-tree portfast bpduguard default
+spanning-tree etherchannel guard misconfig
+spanning-tree extend system-id
+!
+no errdisable detect cause loopback
+no errdisable detect cause gbic-invalid
+no errdisable detect cause pagp-flap
+no errdisable detect cause dtp-flap
+no errdisable detect cause link-flap
+no errdisable detect cause dhcp-rate-limit
+no errdisable detect cause arp-inspection
+errdisable recovery cause arp-inspection
+errdisable recovery interval 120
+!
+vlan 1001
+ name Trunk_Native_VLAN
+!
+crypto key generate rsa general-keys modulus 1024
+!
+ip ssh time-out 60
+ip ssh authentication-retries 3
+ip ssh version 2
+!
+!
+!
+cdp run
+!
+snmp-server location {{ snmp_location }}
+!
+snmp-server enable traps transceiver all
+!
+snmp-server enable traps eigrp

@@ -1,0 +1,20 @@
+!
+call-home
+ no http secure server-identity-check
+ profile CiscoTAC-1
+ reporting smart-licensing-data
+destination transport-method http
+destination address http {{ smart_license_url }}
+destination preferred-msg-format xml
+active
+!
+crypto pki trustpoint SLA-TrustPoint
+ revocation-check none
+exit
+!
+snmp-server enable traps smart-licensing
+!
+exit
+!
+license smart register idtoken {{ smart_license_token }}
+!

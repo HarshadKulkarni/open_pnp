@@ -1,0 +1,18 @@
+{% if server_ports_count != 0 %}
+{% for item in server_ports %}
+!
+interface {{ item.type }}{{ item.number }}
+ description --> {{ item.server_name }} --> {{ item.server_int }}
+ switchport access vlan {{ Vlans.Server.Vlan_Id }}
+ switchport mode access
+ no mdix auto
+ storm-control broadcast level 30.00
+ cdp enable
+ spanning-tree portfast
+ ip verify source
+ snmp trap mac-notification change added
+ snmp trap mac-notification change removed
+ no shutdown
+!
+{% endfor %}
+{% endif %}

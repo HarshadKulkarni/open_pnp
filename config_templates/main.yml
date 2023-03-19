@@ -1,0 +1,33 @@
+- name: Develop L2 switch conifg
+  connection: local
+  gather_facts: no
+  hosts: localhost
+  ignore_errors: yes
+
+  vars_files: 
+    roles/{{ role }}/vars/main.yml
+
+  tasks:
+    - name: Develop conifg for rechable device
+      block:
+       - name: Develop conifg for rechable device
+         include_role:
+           name: "{{ role }}"
+      when: is_device_in_network|lower == 'yes'
+
+    - name: Develop conifg for non-rechable device
+      block:
+       - name: Ping int vlan ip
+         ansible.builtin.shell: ping -c 4 {{ Vlans | json_query('*.Primary_Address') | join('') }}
+         register: ping_response
+
+       - name: Warning message if ping success
+         debug:
+           msg: DUPLICATE IP FOUND, SCRIPT ABORTED
+         when: ping_response.rc == 0
+
+       - name: Develop config if ping response failed
+         include_role:
+           name: "{{ role }}"
+         when: ping_response.rc != 0
+      when: is_device_in_network|lower == 'no'

@@ -1,0 +1,19 @@
+{% if static_ports_count != 0 %}
+{% for item in static_ports %}
+!
+interface {{ item.type }}{{ item.number }}
+ description --> {{ item.name }} (port-security exempt)
+ switchport access vlan {{ Vlans.Admin.Vlan_Id }}
+ switchport mode access
+ ip arp inspection trust
+ priority-queue out
+ no mdix auto
+ storm-control broadcast level 30.00
+ cdp enable
+ spanning-tree portfast
+ ip dhcp snooping trust
+ snmp trap mac-notification change added
+ snmp trap mac-notification change removed
+ no shutdown
+{% endfor %}
+{% endif %}

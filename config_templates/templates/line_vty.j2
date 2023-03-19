@@ -1,0 +1,11 @@
+line vty 0 15
+ no password
+ no privilege level
+ no length 0
+ exec-timeout 10 0
+ timeout login response 90
+ logging synchronous
+ transport preferred none
+ transport input ssh
+ login authentication default
+ transport output none

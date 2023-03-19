@@ -1,0 +1,251 @@
+!
+{% include 'templates/switch_prio.j2' %}
+!
+!
+!
+{% if '9200' in switch_model_1 %}
+redundancy
+ mode sso
+!
+software auto-upgrade enable
+boot-start-marker
+boot system switch all flash:packages.conf
+boot-end-marker
+no ip source-route
+no ip bootp server
+no errdisable detect cause l2ptguard
+!
+{% elif '9300' in switch_model_1 %}
+redundancy
+ mode sso
+!
+software auto-upgrade enable
+boot-start-marker
+boot system switch all flash:packages.conf
+boot-end-marker
+no ip source-route
+no ip bootp server
+no errdisable detect cause l2ptguard
+!
+{% elif '3650' in switch_model_1 %}
+redundancy
+ mode sso
+!
+software auto-upgrade enable
+boot-start-marker
+boot system switch all flash:packages.conf
+boot-end-marker
+no vstack
+vlan internal allocation policy ascending
+no ip source-route
+no ip bootp server
+no errdisable detect cause l2ptguard
+!
+{% elif '3850' in switch_model_1 %}
+redundancy
+ mode sso
+!
+software auto-upgrade enable
+boot-start-marker
+boot system switch all flash:packages.conf
+boot-end-marker
+no vstack
+vlan internal allocation policy ascending
+no ip source-route
+no ip bootp server
+no errdisable detect cause l2ptguard
+!
+{% elif '2960' in switch_model_1 %}
+redundancy
+ mode sso
+!
+software auto-upgrade enable
+no vstack
+vlan internal allocation policy ascending
+no ip source-route
+no ip bootp server
+no errdisable detect cause l2ptguard
+!
+{% elif '3560' in switch_model_1 %}
+redundancy
+ mode sso
+!
+software auto-upgrade enable
+no vstack
+vlan internal allocation policy ascending
+no ip source-route
+no ip bootp server
+no errdisable detect cause l2ptguard
+!
+{% else %}
+!
+{% endif %}
+!
+{% include 'templates/switch_prov.j2' %}
+!
+{% include 'templates/common_config.j2' %}
+
+!
+hostname {{ Hostname }}
+!
+!
+{% include 'templates/aaa.j2' %}
+
+!
+ip tacacs source-interface Vlan{{ Vlans.Plant.Vlan_Id }}
+!
+!
+ip arp inspection validate src-mac ip
+!
+!
+vlan {{ Vlans.Plant.Vlan_Id }}
+ name plant
+!
+!
+!
+{% if '60CX' in switch_model_1 %}
+!
+interface range {{ plant_switch_port_range.type }}0/{{ plant_switch_port_range.start_number }} - {{ plant_switch_port_range.end_number }}
+ description --> admin/voice switch port
+ switchport access vlan {{ Vlans.Plant.Vlan_Id }}
+ switchport mode access
+ no mdix auto
+ storm-control broadcast level 30.00
+ cdp enable
+ spanning-tree portfast
+ ip verify source
+ ip dhcp snooping limit rate 100
+ snmp trap mac-notification change added
+ snmp trap mac-notification change removed
+ no shutdown
+!
+{% else %}
+{% for item in switch_number_in_stack_list %}
+!
+interface range {{ plant_switch_port_range.type }}{{ item }}/0/{{ plant_switch_port_range.start_number }} - {{ plant_switch_port_range.end_number }}
+ description --> Plant switch port
+ switchport access vlan {{ Vlans.Plant.Vlan_Id }}
+ no mdix auto
+ storm-control broadcast level 30.00
+ cdp enable
+ spanning-tree portfast
+ ip verify source
+ ip dhcp snooping limit rate 100
+ snmp trap mac-notification change added
+ snmp trap mac-notification change removed
+ no shutdown
+!
+{% endfor %}
+{% endif %}
+!
+{% if port_channel|lower == 'yes' %}
+!
+interface Port-channel {{ local_po }}
+ description --> PO{{ remote_po }}
+ switchport trunk native vlan 1001
+ switchport trunk allowed vlan {{ Vlans.Plant.Vlan_Id }}
+ switchport mode trunk
+ switchport nonegotiate
+ logging event trunk-status
+ ip arp inspection trust
+ ip dhcp snooping trust
+ storm-control broadcast level 30.00
+ no shutdown
+!
+{% for item in Uplinks %}
+interface {{ item.type }}{{ item.number }}
+ description --> {{ item.remote_hostname_short }} > {{ item.remote_SW_int }}
+ switchport trunk native vlan 1001
+ switchport trunk allowed vlan {{ Vlans.Plant.Vlan_Id }}
+ switchport mode trunk
+ switchport nonegotiate
+ logging event trunk-status
+ ip arp inspection trust
+ ip dhcp snooping trust
+ storm-control broadcast level 30.00
+ channel-group {{ local_po }} mode active
+ no shutdown
+!
+{% endfor %}
+{% elif port_channel|lower == 'no' %}
+!
+{% for item in Uplinks %}
+interface {{ item.type }}{{ item.number }}
+ description --> {{ item.remote_hostname_short }} > {{ item.remote_SW_int }}
+ switchport trunk native vlan 1001
+ switchport trunk allowed vlan {{ Vlans.Plant.Vlan_Id }}
+ switchport mode trunk
+ switchport nonegotiate
+ logging event trunk-status
+ ip arp inspection trust
+ ip dhcp snooping trust
+ storm-control broadcast level 30.00
+ no shutdown
+!
+{% endfor %}
+{% endif %}
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+!
+interface Vlan{{ Vlans.Plant.Vlan_Id }}
+ description --> Switch Management
+ no ip proxy-arp
+ ip address {{ Vlans.Plant.Primary_Address }} {{ Vlans.Plant.mask }}
+ no shutdown
+!
+!
+ip default-gateway {{ ip_default_gateway }}
+!
+no ip http server
+no ip http secure-server
+!
+logging source-interface Vlan{{ Vlans.Plant.Vlan_Id }}
+!
+!
+{% if Domain_Name == 'gw.na.xyz.com' %}
+{% include 'templates/NA.j2' %}
+{% elif Domain_Name == 'gw.la.xyz.com' %}
+{% include 'templates/LA.j2' %}
+{% elif Domain_Name == 'gw.eu.xyz.com' %}
+{% include 'templates/EMEA.j2' %}
+{% elif Domain_Name == 'gw.sg.xyz.com' %}
+{% include 'templates/APAC.j2' %}
+{% else %}
+{% endif %}
+
+!
+{% include 'templates/snmp_acl.j2' %}
+
+!
+snmp-server trap-source Vlan{{ Vlans.Plant.Vlan_Id }}
+!
+{% include 'templates/secure_config.j2' %}
+
+!
+banner motd ^C
+{% include 'templates/banner.j2' %}
+
+^C
+!
+{% include 'templates/line_vty.j2' %}
+
+!
+{% include 'templates/line_aux.j2' %}
+
+!
+{% include 'templates/line_con.j2' %}
+
+!
+ntp source interface Vlan {{ Vlans.Plant.Vlan_Id }}
+!
+{% include 'templates/ntp.j2' %}
+
+!
+do-exec write memory
+!
+no pnp profile pnp-zero-touch
+!
+end

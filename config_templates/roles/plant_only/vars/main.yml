@@ -1,0 +1,64 @@
+# *********Config_Section************
+dhcp_subnet: 172.21.28.0/24
+
+is_device_in_network: 'No'
+
+Serial_Number: JAE26421DX5
+Hostname: jiaxing22-swt
+
+Domain_Name: gw.sg.xyz.com
+
+Vlans:
+  Plant:
+      Vlan_Id: 129
+      Primary_Address: 10.239.129.4
+      mask: 255.255.255.0
+
+port_channel: 'No'
+
+local_po:
+
+remote_po:
+
+Uplinks:
+- number: 1/1/1
+  remote_SW_int: Gi 1/1/2
+  type: GigabitEthernet
+  remote_hostname_short: jiaxing16-lcs
+  
+
+plant_switch_port_range:
+  type: GigabitEthernet
+  start_number: 2
+  end_number: 24
+
+switch_number_in_stack: 1
+
+switch_number_in_stack_list: 
+  - 1
+
+switch_model_1: C9200L-24T-4G
+
+ip_default_gateway: 10.239.129.1
+
+snmp_location: '#r_APAC#c_China#s_Jiaxing#Bd_Production Building,4th Floor'
+
+# *********CMDB_Section************
+add_device:
+  - Name: jiaxing22-swt.gw.sg.xyz.com
+    SerialNumber: JAE26421DX5
+    ShortDescription: "Plant L2 Switch"
+    Model: "C9200L-24T-4G"
+    ManufacturerName: "Cisco Systems"
+    SupportedBy: "L2_Ops"
+    OwnedBy: "VASANTHA KUMAR MOHANASUNDARAM"
+    Status: "Being Assembled"
+    PrimaryUsage: "L2 Switch"
+    Room: "IT Room"
+    Floor: "4th Floor"
+    Impact: "3-Moderate/Limited"
+    IsVirtual: "No"
+    Capability: "Switch"
+    Site: "JIAXING-NORTH SIDE OF EAST AVENUE URBAN INDUSTRIAL GARDEN QI"
+    Urgency: "3-Medium"
+    Environment: "Production"

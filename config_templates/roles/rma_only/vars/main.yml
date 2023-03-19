@@ -1,0 +1,46 @@
+# *********Config_Section************
+
+dhcp_subnet: 10.116.185.0/24
+# dhcp_subnet is the subnet which will be used to assing DHCP IP to new switch. Most of time this subnet will be admin subnet on existing L3 swithch. 
+# if we select "plant_only" template to configure plant switch still the value for this variable will be "Admin" L3 switch subnet as DHCP ramge might not be avalible 
+# for plant L3 switch subnet...
+
+is_device_in_network: 'Yes'
+# is_device_in_network will be always answered as No as faulty device will be down and IP is not in network
+# is_device_in_network will be answered as Yes if its Lifecycle device and new switch IP is already in network.
+# is_device_in_network will be answered as No if this is new nstalltion and not LifeCyle device
+
+Serial_Number: PARATEST1234
+# Serial_Number is the master switch Serial_Number, remember lowest mac address switch will become master switch
+
+Hostname: paragominas4-swt
+# Hostname of the switch
+
+Domain_Name: gw.la.xyz.com
+# Domain_Name of the switch
+
+Vlans:
+  Vlan: 
+    Primary_Address: 10.116.185.5
+
+# *********CMDB_Section************
+add_device:
+  - Name: paragominas4-swt.gw.la.xyz.com
+    SerialNumber: TSP25190098
+    ShortDescription: "L2 Switch"
+    Model: "C9200L-24P-4G"
+    ManufacturerName: "Cisco Systems"
+    SupportedBy: "L2_Ops"
+    OwnedBy: "VASANTHAKUMAR MOHANASUNDARAM"
+    Status: "Being Assembled"
+    PrimaryUsage: "Layer 2 Switch"
+    Room: "Sala_de_Operacao"
+    Floor: "1"
+    Impact: "3-Moderate/Limited"
+    IsVirtual: "No"
+    Capability: "Switch"
+    Site: "PARAGOMINAS - PARA - xyz AGRICOLA S/A-PARAGOMINAS"
+    Urgency: "3-Medium"
+    Environment: "Production"
+
+# NOTE :: This CMDB section creates new entry in CMDB, old entry of the device should be marked as "return to vendor" manually.

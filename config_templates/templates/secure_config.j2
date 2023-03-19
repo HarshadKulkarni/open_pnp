@@ -1,0 +1,36 @@
+snmp-server host {{ forescout_dr }} version 2c {{ rw_97_lieberman }}
+snmp-server community {{ ro_46_lieberman }} RO 46
+snmp-server community {{ rw_96_lieberman }} RW 96
+snmp-server community {{ ro_47_lieberman }} RO 47
+snmp-server community {{ rw_97_lieberman }} RW 97
+snmp-server contact TCS NetOps
+snmp-server system-shutdown
+snmp-server enable traps snmp authentication linkdown linkup coldstart warmstart
+snmp-server enable traps tty
+snmp-server enable traps config
+snmp-server ifindex persist
+snmp-server enable traps mac-notification change move threshold
+snmp-server enable traps envmon fan shutdown supply temperature status
+snmp-server enable traps license
+logging trap informational
+logging buffered {{ buffer_size }} informational
+logging host {{ new_hpna }}
+no logging console
+no service pad
+no service config
+service tcp-keepalives-in
+service tcp-keepalives-out
+service timestamps debug datetime msec localtime show-timezone year
+service timestamps log datetime msec localtime show-timezone year
+service password-encryption
+service nagle
+no ip domain lookup
+no ip finger
+no logging console
+no service pad
+no ip http server
+no ip http secure-server
+no ip source-route
+no logging console
+ip ssh time-out {{ sshtimeoutvalue }}
+ip ssh version {{ sshversion }}

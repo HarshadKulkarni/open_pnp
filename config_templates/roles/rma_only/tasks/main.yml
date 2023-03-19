@@ -1,0 +1,5 @@
+- name: execute taks to generate config
+  ansible.builtin.command: curl --user {{ git_uname }}:{{ git_token }} 'https://raw.git.cloud.com/NetworkInfrastructure/switch_backups/master/{{ Hostname }}.{{ Domain_Name }}.cfg' -o 'configs/{{ Serial_Number }}.cfg'
+  environment:
+    - HTTP_PROXY: http://{{ proxy_username }}:{{ proxy_password | urlencode }}@web.prod.proxy.xyz.com:4200
+    - HTTPS_PROXY: http://{{ proxy_username }}:{{ proxy_password | urlencode }}@web.prod.proxy.xyz.com:4200

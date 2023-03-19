@@ -1,0 +1,113 @@
+# *********Config_Section************
+
+dhcp_subnet: 10.113.1.0/24
+
+is_device_in_network: 'Yes'
+
+Serial_Number: FOC26292MRL
+
+Hostname: perry12-swt
+
+Domain_Name: gw.la.xyz.com
+
+Vlans:
+  Admin:
+      Vlan_Id: 1
+      Primary_Address: 10.113.1.55
+      mask: 255.255.255.0
+  Voice:
+      Vlan_Id: 500
+     
+port_channel: 'NO'
+
+local_po: 0
+
+remote_po: 0
+
+Uplinks:
+  - number: 1/0/24
+    remote_SW_int: Gig 1/0/24
+    type: GigabitEthernet
+    remote_hostname_short: perry3-lcs
+
+  - number: 
+    remote_SW_int: 
+    type: 
+    remote_hostname_short: 
+ 
+admin_voice_port_range:
+  type: gigabitEthernet
+  start_number: 1
+  end_number: 23
+
+wap_ports_count: 0
+
+wap_ports: 
+  - type: 
+    number: 
+    wap_name:
+    wap_int:
+    
+  - type: 
+    number: 
+    wap_name: 
+    wap_int: 
+
+
+printer_count: 0
+
+printer_ports:
+  - first_printer:
+    type: 
+    number:
+    printer_name: 
+
+static_ports_count: 0
+
+static_ports:
+  - first_device:
+    type: 
+    number:
+    device_name: 
+
+lobby_phone_count: 0
+
+lobby_phone_ports:
+  - first_phone:
+    type: 
+    number:   
+    device_name:
+
+switch_number_in_stack: 1
+
+switch_number_in_stack_list:
+  - 1
+ 
+  
+switch_model_1: C9200L-24P-4G-E
+
+ip_default_gateway: 10.113.1.1
+
+snmp_location: '#r_LA#c_Hondurast#s_Pronorsa'
+
+# *********CMDB_Section************
+add_device:
+  - Name: perry12-swt.gw.la.xyz.com
+    SerialNumber: FOC26292MRL
+    ShortDescription: "Admin L2 switch"
+    Model: "C9200L-24P-4G-E"
+    ManufacturerName: "Cisco Systems"
+    SupportedBy: "L2_Ops"
+    OwnedBy: "VASANTHA KUMAR MOHANASUNDARAM"
+    Status: "Being Assembled"
+    PrimaryUsage: "Layer 2 Switch"
+    Room: "ServerRoom"
+    Floor: "Ground Floor"
+    Impact: "3-Moderate/Limited"
+    IsVirtual: "No"
+    Capability: "Switch"
+    Site: "GUATEMALA CITY-33 CALLE 0-73 ZONA 3"
+    Urgency: "3-Medium"
+    Environment: "Production"
+
+ 

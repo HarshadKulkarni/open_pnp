@@ -1,0 +1,106 @@
+# *********Config_Section************
+dhcp_subnet: 10.31.196.0/24
+
+# dhcp_subnet is the subnet which will be used to assing DHCP IP to new switch. Most of time this subnet will be admin subnet on existing L3 swithch. 
+# if we select "plant_only" template to configure plant switch still the value for this variable will be "Admin" L3 switch subnet as DHCP ramge might not be avalible 
+# for plant L3 switch subnet.
+
+is_device_in_network: 'No'
+
+# is_device_in_network will be answered as Yes if its Lifecycle device and new switch IP is already in network
+# is_device_in_network will be answered as No if this is new nstalltion and not LifeCyle device
+
+Serial_Number: JAE24251JPL
+# Serial_Number is the master switch Serial_Number, remember lowest mac address switch will become master switch
+
+Hostname: wahpeton96-swt
+Domain_Name: gw.na.xyz.com
+Vlans:
+  Admin:
+      Vlan_Id: 5
+      Primary_Address: 10.10.5.16
+      mask: 255.255.255.192
+ 
+  Voice:
+      Vlan_Id: 500
+  
+port_channel: 'No'
+# port_channel if using Yes else NO, if no then local_po and remote_po fields are not valid
+
+local_po:
+
+remote_po:
+
+Uplinks:
+- number: 1/1/1
+  remote_SW_int: 1/0/26
+  type: TenGigabitEthernet
+  remote_hostname_short: wahpeton50-lcs
+  
+  # Uplinks of the switch
+  
+admin_voice_port_range:
+  type: gigabitEthernet
+  start_number: 1
+  end_number: 24
+# Admin port range with mac security enabled
+  
+printer_count: 0
+# if any printer connected
+
+printer_ports:
+- name: 
+  number: 
+  type: 
+  
+  # if printer_count is not = 0 then printer details has to updated
+  
+static_ports_count: 0
+# same as printer port
+
+static_ports:
+- name: 
+  number: 
+  type: 
+  
+lobby_phone_count: 0
+# same as printer port
+
+lobby_phone_ports:
+- name: 
+  number: 
+  type: 
+  phone_mac_address: 
+  
+switch_number_in_stack: 1
+# Number of stack switches
+
+switch_number_in_stack_list:
+- 1
+
+switch_model_1: C9200L-24PL-4G
+
+ip_default_gateway: 10.10.5.1
+
+snmp_location: '#r_NA#c_US#s_Wahpeton#Bd_IDF#Sh_Network'
+
+# *********CMDB_Section************
+add_device:
+  - Name: wahpeton96-swt.gw.na.xyz.com
+    SerialNumber: JAE24251JPL
+    ShortDescription: "L2 Switch"
+    Model: "C9200L-24PL-4G"
+    ManufacturerName: "Cisco Systems"
+    SupportedBy: "L2_Ops"
+    OwnedBy: "VASANTHA KUMAR MOHANASUNDARAM"
+    Status: "Being Assembled"
+    PrimaryUsage: "Layer 2 Switch"
+    Room: "Server"
+    Floor: "Ground floor"
+    Impact: "3-Moderate/Limited"
+    IsVirtual: "No"
+    Capability: "Switch"
+    Site: "18049 COUNTY ROAD 8 EAST"
+    Urgency: "3-Medium"
+    Environment: "Production"
+  

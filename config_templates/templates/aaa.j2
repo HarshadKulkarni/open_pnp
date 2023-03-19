@@ -1,0 +1,20 @@
+aaa new-model
+!
+aaa group server tacacs+ GL-TACACS-SERVERS
+ server-private {{ tacacs_servers[0] }} timeout 3 key 0 {{ aaa_key }}
+ server-private {{ tacacs_servers[1] }} timeout 3 key 0 {{ aaa_key }}
+ server-private {{ tacacs_servers[2] }} timeout 3 key 0 {{ aaa_key }}
+!
+aaa authentication login default group GL-TACACS-SERVERS local
+aaa authentication login console group GL-TACACS-SERVERS local
+aaa authentication enable default none
+aaa authorization console
+aaa authorization config-commands
+aaa authorization exec default group GL-TACACS-SERVERS if-authenticated
+aaa authorization exec always if-authenticated
+aaa authorization commands 15 default group GL-TACACS-SERVERS if-authenticated
+aaa accounting exec default start-stop group GL-TACACS-SERVERS
+aaa accounting commands 15 default start-stop group GL-TACACS-SERVERS
+aaa accounting network default start-stop group GL-TACACS-SERVERS
+aaa accounting connection default start-stop group GL-TACACS-SERVERS
+aaa accounting system default start-stop group GL-TACACS-SERVERS

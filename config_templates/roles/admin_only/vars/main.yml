@@ -1,0 +1,105 @@
+# *********Config_Section************
+
+dhcp_subnet: 172.21.28.0/24
+# dhcp_subnet is the subnet which will be used to assing DHCP IP to new switch. Most of time this subnet will be admin subnet on existing L3 switch. 
+# if we select "plant_only" template to configure plant switch still the value for this variable will be "Admin" L3 switch subnet as DHCP ramge might not be available 
+# for plant L3 switch subnet TESTING_123
+
+is_device_in_network: 'No'
+# is_device_in_network will be answered as Yes if its Lifecycle device and new switch IP is already in network
+# is_device_in_network will be answered as No if this is new nstalltion and not LifeCyle device
+
+Serial_Number: JAE26382047
+# Serial_Number is the master switch Serial_Number, remember lowest mac address switch will become master switch
+
+Hostname: jiaxing21-swt
+# Hostname of the switch
+
+Domain_Name: gw.sg.xyz.com
+# Domain_Name of the switch
+
+Vlans:
+  Admin:
+    Primary_Address: 10.239.128.4
+    Vlan_Id: 128
+    mask: 255.255.255.0
+
+port_channel: 'no'
+# port_channel if using Yes else NO, if no then local_po and remote_po fields are not valid
+
+local_po:
+
+remote_po:
+
+Uplinks:
+  - number: 1/1/1
+    remote_SW_int: Gi1/1/1
+    type: GigabitEthernet
+    remote_hostname_short:  jiaxing2-lcs
+
+# Uplinks of the switch
+
+admin_port_range:
+  end_number: 24
+  start_number: 2
+  type: GigabitEthernet
+# Admin port range with mac security enabled
+
+printer_count: 0
+# if any printer connected 
+
+printer_ports:
+  - name:
+    number:
+    type:
+
+# if printer_count is not = 0 then printer details has to updated
+
+static_ports_count: 0
+# same as printer port
+
+static_ports:
+  - name:
+    number:
+    type:
+
+lobby_phone_count: 0
+# same as printer port
+
+switch_number_in_stack: 1
+# Number of stack switches
+
+switch_model_1: C9200L-24P-4G
+
+switch_number_in_stack_list:
+ - 1
+  
+# Develop a list of stack switch
+
+# switch model numbers if its stack of 2 or 3 new switch_model_2 and switch_model_3 KVP has to create
+
+ip_default_gateway: 10.239.128.1
+# IP default gateway 
+
+snmp_location: '#r_APAC#c_China#s_Jiaxing#Bd_Production Building,3rd Floor'
+# snmp location
+
+# *********CMDB_Section************
+add_device:
+  - Name: jiaxing21-swt.gw.sg.xyz.com
+    SerialNumber: JAE26382047
+    ShortDescription: "Admin L2 Switch"
+    Model: "C9200L-24P-4G"
+    ManufacturerName: "Cisco Systems"
+    SupportedBy: "L2_Ops"
+    OwnedBy: "VASANTHA KUMAR MOHANASUNDARAM"
+    Status: "Being Assembled"
+    PrimaryUsage: "Layer 2 Switch"
+    Room: "IT room"
+    Floor: "3rd Floor"
+    Impact: "3-Moderate/Limited"
+    IsVirtual: "No"
+    Capability: "Switch"
+    Site: "JIAXING-NORTH SIDE OF EAST AVENUE URBAN INDUSTRIAL GARDEN QI"
+    Urgency: "3-Medium"
+    Environment: "Production" #

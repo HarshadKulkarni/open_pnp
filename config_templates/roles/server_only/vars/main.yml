@@ -1,0 +1,121 @@
+# *********Config_Section************
+
+dhcp_subnet: 10.116.25.0/24
+
+is_device_in_network: 'no'
+
+Serial_Number: FCW1843A52L
+
+Domain_Name: gw.la.xyz.com
+
+Hostname: santarem20-swt
+
+Vlans:
+  Server:
+      Vlan_Id: 25
+      Primary_Address: 10.116.25.20
+      mask: 255.255.255.0
+
+port_channel: 'no'
+
+local_po: 0
+
+remote_po: 0
+
+Uplinks:
+  - number: 1/0/24
+    remote_SW_int: Te2/0/3
+    type: gigabitEthernet
+    remote_hostname_short: santarem3-lcs
+    
+server_ports_count: 14
+
+server_ports:
+  - type: gigabitEthernet
+    number: 1/0/1
+    server_name: Server (port-security exempt)
+    server_int: gb1
+  - type: gigabitEthernet
+    number: 1/0/2
+    server_name: Server (port-security exempt)
+    server_int: gb1
+  - type: gigabitEthernet
+    number: 1/0/3
+    server_name: Server (port-security exempt)
+    server_int: gb1
+  - type: gigabitEthernet
+    number: 1/0/4
+    server_name: Server (port-security exempt)
+    server_int: gb1
+  - type: gigabitEthernet
+    number: 1/0/5
+    server_name: Server (port-security exempt)
+    server_int: gb1
+  - type: gigabitEthernet
+    number: 1/0/6
+    server_name: Server (port-security exempt)
+    server_int: gb1
+  - type: gigabitEthernet
+    number: 1/0/7
+    server_name: Server (port-security exempt)
+    server_int: gb1
+  - type: gigabitEthernet
+    number: 1/0/8
+    server_name: Server (port-security exempt)
+    server_int: gb1
+  - type: gigabitEthernet
+    number: 1/0/9
+    server_name: Server (port-security exempt)
+    server_int: gb1
+  - type: gigabitEthernet
+    number: 1/0/10
+    server_name: Server (port-security exempt)
+    server_int: gb1
+  - type: gigabitEthernet
+    number: 1/0/11
+    server_name: Server (port-security exempt)
+    server_int: gb1
+  - type: gigabitEthernet
+    number: 1/0/12
+    server_name: Server (port-security exempt)
+    server_int: gb1
+  - type: gigabitEthernet
+    number: 1/0/13
+    server_name: Server (port-security exempt)
+    server_int: gb1
+  - type: gigabitEthernet
+    number: 1/0/14
+    server_name: Server (port-security exempt)
+    server_int: gb1
+  
+switch_number_in_stack: 1
+
+switch_number_in_stack_list: 
+  - 1
+  
+switch_model_1: WS-C2960X-24PS-L
+
+
+ip_default_gateway: 10.116.25.1
+
+snmp_location: '#r_LA#c_Brazil#s_Ssantarem#Bd_MDF#Sh_New Servers'
+
+# *********CMDB_Section************
+add_device:
+  - Name: santarem20-swt.gw.na.xyz.com
+    SerialNumber: FCW1843A52L
+    ShortDescription: "L2 Switch"
+    Model: "WS-C2960X-24PS-L"
+    ManufacturerName: "Cisco Systems"
+    SupportedBy: "L2_Ops"
+    OwnedBy: "VASANTHA KUMAR MOHANASUNDARAM"
+    Status: "Deployed"
+    PrimaryUsage: "Layer 2 Switch"
+    Room: "MDF"
+    Floor: "Ground floor"
+    Impact: "3-Moderate/Limited"
+    IsVirtual: "No"
+    Capability: "Switch"
+    Site: "BRA - SANTAREM - AV CUIABA"
+    Urgency: "3-Medium"
+    Environment: "Production"

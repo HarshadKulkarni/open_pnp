@@ -1,0 +1,13 @@
+{% if Domain_Name == 'gw.na.xyz.com' %}
+ ip helper-address 10.2.58.30
+ ip helper-address 10.47.174.13
+{% elif Domain_Name == 'gw.eu.xyz.com' %}
+ ip helper-address 10.160.20.23
+ ip helper-address 172.31.28.99
+{% elif Domain_Name == 'gw.la.xyz.com' %}
+ ip helper-address 10.126.9.99
+ ip helper-address 172.28.30.32
+{% elif Domain_Name == 'gw.sg.xyz.com' %}
+ ip helper-address 10.126.9.99
+ ip helper-address 172.26.18.141
+{% endif %}

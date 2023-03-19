@@ -1,0 +1,129 @@
+# *********Config_Section************
+
+dhcp_subnet: 10.27.51.0/24
+
+# dhcp_subnet is the subnet which will be used to assing DHCP IP to new switch. Most of time this subnet will be admin subnet on existing L3 swithch.
+# if we select "plant_only" template to configure plant switch still the value for this variable will be "Admin" L3 switch subnet as DHCP ramge might not be avalible
+# for plant L3 switch subnet
+
+is_device_in_network: 'No'
+
+Serial_Number: FOC2640YD3C
+
+Hostname: londoncacmc181-swt
+
+Domain_Name: gw.na.xyz.com
+
+
+Vlans:
+  Admin:
+      Vlan_Id: 204
+      Primary_Address: 10.28.204.41
+      mask: 255.255.255.0
+
+  Wireless:
+      Vlan_Id: 51
+
+port_channel: 'no'
+
+local_po:
+remote_po:
+
+Uplinks:
+  - number: 1/1/1
+    remote_SW_int: Gig3/0/8
+    type: gigabitethernet
+    remote_hostname_short: londoncacmc9-lcs
+
+  - number: 1/1/2
+    remote_SW_int: Gig3/0/8
+    type: gigabitethernet
+    remote_hostname_short: londoncacmc10-lcs
+
+admin_port_range:
+   type: Tengigabitethernet
+   start_number: 8
+   end_number: 24
+
+wap_ports_count: 7
+
+wap_ports:
+  - type: Tengigabitethernet
+    number: 1/0/1
+    wap_name: wap1-wap
+    wap_int: Gig 0
+
+  - type: Tengigabitethernet
+    number: 1/0/2
+    wap_name: wap2-wap
+    wap_int: Gig 0
+
+  - type: Tengigabitethernet
+    number: 1/0/3
+    wap_name: wap3-wap
+    wap_int: Gig 0
+
+  - type: Tengigabitethernet
+    number: 1/0/4
+    wap_name: wap4-wap
+    wap_int: Gig 0
+
+  - type: Tengigabitethernet
+    number: 1/0/5
+    wap_name: wap5-wap
+    wap_int: Gig 0
+
+  - type: Tengigabitethernet
+    number: 1/0/6
+    wap_name: wap6-wap
+    wap_int: Gig 0
+
+  - type: Tengigabitethernet
+    number: 1/0/7
+    wap_name: wap7-wap
+    wap_int: Gig 0
+
+printer_count: 0
+
+ #printer_ports:
+  #- first_printer:
+  #  type: 
+  #  number:
+  #  printer_name: 
+static_ports_count: 0
+# static_ports:
+#  - first_device:
+ #   type: 
+ #   number:
+ #   device_name:  
+switch_number_in_stack: 1
+switch_number_in_stack_list:
+- 1
+
+switch_model_1: C9300-24UX-E
+
+ip_default_gateway: 10.28.204.1
+
+snmp_location: 'snmp-server location r_CA#c_London#s_London#Bd_#Ro_IDF3#Sh_MFPt'
+
+
+# *********CMDB_Section************
+
+add_device:
+   - Name: londoncacmc181-swt
+     SerialNumber: FOC2640YD3C
+     ShortDescription: "Admin L2 switch"
+     Model: "C9300-24UX-E"
+     ManufacturerName: "Cisco Systems"
+     SupportedBy: "L2_Ops"
+     OwnedBy: "VASANTHA KUMAR MOHANASUNDARAM"
+     Status: "Deployed"
+     PrimaryUsage: "Layer 2 Switch"
+     Room: "IDF3"
+     Floor: "MFP"
+     Impact: "3-Moderate/Limited"
+     IsVirtual: "No"
+     Capability: "Switch"
+     Site: "LONDON"
+     Urgency: "3-Medium"
+     Environment: "Production"

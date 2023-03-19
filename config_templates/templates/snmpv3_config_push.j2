@@ -1,0 +1,8 @@
+!
+access-list 98 remark ----SNMP-RW-ACL----Ansible---
+access-list 98 permit 10.48.134.42
+!
+snmp-server view admin_1 iso included
+snmp-server group admin_1GRP v3 priv write admin_1
+snmp-server user admin_1snmp admin_1GRP v3 auth sha {{ snmp_password }} priv aes 128 {{ snmp_password }} access 98
+!
